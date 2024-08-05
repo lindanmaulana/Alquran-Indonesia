@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { handleNavigasi } from "../../../../Redux/Slices/DetailSurah/FeatureNavigasiDetailSurah";
 
-const ButtonNavigasi = ({ titleButton }) => {
+const ButtonNavigasi = ({ titleButton, isLogin }) => {
   const [isClick, setIsClick] = useState(false);
   const { navigasi } = useDetailSurahRedux();
   const dispatch = useDispatch();
@@ -17,6 +17,8 @@ const ButtonNavigasi = ({ titleButton }) => {
   useEffect(() => {
     dispatch(handleNavigasi(isClick));
   }, [dispatch, isClick]);
+
+  if(isLogin) return <p>Loading....</p>
   
   return (
     <Link

@@ -19,7 +19,7 @@ const SurahEl = () => {
 
   // dispatcg redux
   const handleClick = (res) => {
-    dispatch(handleBaruDibaca(res.nama_latin));
+    dispatch(handleBaruDibaca({name: res.nama_latin, id: res.nomor}));
   };
 
   return (

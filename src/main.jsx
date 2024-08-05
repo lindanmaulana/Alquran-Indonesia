@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -7,8 +7,11 @@ import { Provider } from "react-redux";
 import store from "./Redux/Store/store.js";
 import ErrorFallbackBoundary from "./Pages/404.jsx";
 import { alquranServices } from "./Services/alquran.services.js";
-import DetailSurahPages from "./Pages/DetailSurahPages.jsx";
+// import DetailSurahPages from "./Pages/DetailSurahPages.jsx";
+export const DetailSurahPages = lazy(() => import("./Pages/DetailSurahPages.jsx"));
+// const DetailSurahPages = lazy(() => import(""))
 import { QueryClient, QueryClientProvider } from "react-query";
+import SkeletonDetailSurah from "./Components/Skeleton/DetailSurah/SkeletonIndex.jsx";
 
 const router = createBrowserRouter([
   {
@@ -19,7 +22,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/surah/:id/*",
-    element: <DetailSurahPages />,
+    element: (
+      <Suspense fallback={<SkeletonDetailSurah />}>
+        <DetailSurahPages />
+      </Suspense>
+    ),
     errorElement: <ErrorFallbackBoundary />,
   },
   {

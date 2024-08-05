@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
-    new: []
+    new: [],
+    baruDibaca: true,
+    penanda: false
 }
 
 const FeatureBaruDibaca = createSlice({
@@ -14,9 +16,19 @@ const FeatureBaruDibaca = createSlice({
             } else {
                 state.new = [...state.new, action.payload]
             }
+        },
+
+        handleRouteBaruDibaca: (state, action) => {
+            state.baruDibaca = action.payload
+            state.penanda = false
+        },
+
+        handleRoutePenanda: (state, action) => {
+            state.penanda = action.payload
+            state.baruDibaca = false
         }
     }
 })
 
-export const {handleBaruDibaca} = FeatureBaruDibaca.actions
+export const {handleBaruDibaca, handleRouteBaruDibaca, handleRoutePenanda} = FeatureBaruDibaca.actions
 export default FeatureBaruDibaca.reducer
